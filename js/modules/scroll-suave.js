@@ -1,5 +1,3 @@
-import { IgnorePlugin } from "webpack";
-
 export default class ScrollSuave {
   constructor(links, options) {
     this.linksInternos = document.querySelectorAll(links);
@@ -16,7 +14,6 @@ export default class ScrollSuave {
     event.preventDefault();
     const href = event.currentTarget.getAttribute('href');
     const section = document.querySelector(href); /*  selecionar a section  */
-
     section.scrollIntoView(this.options);
   }
 
