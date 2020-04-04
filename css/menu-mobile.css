@@ -1,0 +1,58 @@
+[data-menu="button"] { /*não quero q o botão seja exibido na página, só quando a larg desejada for alcançada abaixo e se JS tiver ativado no navegador, por isso o .js. Podia ser uma classe normal no lugar do data-menu*/
+  display: none;
+}
+@media (max-width: 700px) { 
+  .js [data-menu="button"] {
+      display: flex;
+      background:  #222;
+      border: none;
+      padding:  .5rem 1rem;
+      border-radius: 4px;
+      text-transform: uppercase;
+      font-family: 'IBM Plex Mono', monospace;
+      font-weight: bold;
+      color: white;
+      cursor: pointer;
+      margin: 10px;
+      align-items: center;
+      position: relative;
+      z-index: 300; /*o botao ta em cima do menu*/
+  }
+
+  /*criação dos tracinhos do MENU*/
+  .js [data-menu="button"]::before {
+  content: ' ';
+  display: inline-block;
+  height:  2px;
+  width: 12px;
+  background: #fff;
+  margin-right: 4px; /*entre os tracinhos e o nome menu*/
+  box-shadow: 0 4px #fff, 0 -4px #fff;
+  transition: transform .3s ;
+  }
+
+  /*quando o botão MENU tá ativo, ele vira os tracinhos para cima*/
+  .js  [data-menu="button"].active::before { 
+    transform: rotate(90deg);
+  }
+
+  .js  [data-menu="list"] { /* pode ser por id ou class  CONFIGS botão menu*/
+    display: none; 
+    position: absolute;
+    background: #fB5;
+    width: 160px;
+    z-index: 200;
+    top: 0;
+    padding: 60px 0 20px 0;
+    box-shadow: 2px 2px  2px 0 rgba(0, 0, 0, .2);
+  }
+  .js  [data-menu="list"].active  {
+    display: block; /*um item embaixo do outro*/
+    animation:  show-right .3s forwards;
+  }
+
+  .js  .dropdown-menu { /*o menu q aabre no sobre*/
+    position: static; /*qndo clica ele ta abrindo para baixo e n por cima dos itens*/
+    border: none;
+  }
+}
