@@ -28,5 +28,6 @@ export default class TabNav { // a navegacao dos animais
       this.activeTab(0);
       this.addTabNavEvent();
     }
+    return this;
   }
 }
