@@ -1,4 +1,4 @@
-import initAnimalNumeros from './animal-numeros.js';
+import AnimalNumeros from './animal-numeros.js';
 
 export default function initFetchAnimais() {
   async function fetchAnimais(url) {
@@ -10,19 +10,21 @@ export default function initFetchAnimais() {
         const divAnimal = createAnimal(animal);
         numerosGrid.appendChild(divAnimal);
       });
-      initAnimalNumeros();
-    } catch(erro) { /*se o try der errado*/
+
+      const animalNumeros = new AnimalNumeros('[data-numero]', '.numeros', 'ativo');
+      animalNumeros.init();
+    } catch (erro) { /*se o try der errado*/
       console.log(erro);
     }
   }
-  
-  
+
+
   function createAnimal(animal) {
     const div = document.createElement('div');
     div.classList.add('numero-animal');
     div.innerHTML = `<h3>${animal.specie}</h3><span data-numero>${animal.total}</span>`;
     return div;
   }
-  
+
   fetchAnimais('./animaisapi.json');
 }
