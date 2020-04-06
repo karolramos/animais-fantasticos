@@ -7,7 +7,7 @@ import ToolTip from './modules/tooltip.js';
 import initDropDownMenu from './modules/dropdown-menu.js';
 import initMenuMobile from './modules/menu-mobile.js';
 import initHrFuncionamento from './modules/hrfuncionamento.js';
-import initFetchAnimais from './modules/fetch-animais.js';
+import fetchAnimais from './modules/fetch-animais.js';
 import initFetchBitcoin from './modules/fetch-bitcoin.js';
 import initAnimacaoScroll from './modules/scroll-animacao.js';
 
@@ -32,5 +32,6 @@ initAnimacaoScroll();
 initDropDownMenu();
 initMenuMobile();
 initHrFuncionamento();
-initFetchAnimais();
 initFetchBitcoin();
+
+fetchAnimais('../../animaisapi.json', '.numeros-grid');
