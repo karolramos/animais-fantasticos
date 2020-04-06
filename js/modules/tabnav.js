@@ -1,4 +1,4 @@
-export default class TabNav { // a navegacao dos animais
+export default class TabNav {
   constructor(menu, content) {
     this.tabMenu = document.querySelectorAll(menu);
     this.tabContent = document.querySelectorAll(content);
@@ -8,15 +8,14 @@ export default class TabNav { // a navegacao dos animais
   // Ativa a tab de acordo com o index da mesma
   activeTab(index) {
     this.tabContent.forEach((section) => {
-      section.classList.remove(this.activeClass); // remove todas as classes ativas
+      section.classList.remove(this.activeClass);
     });
     const direcao = this.tabContent[index].dataset.anime;
-    this.tabContent[index].classList.add(this.activeClass, direcao); // depois adc a class ativo no menu li q tiver ativo(Clicado)
+    this.tabContent[index].classList.add(this.activeClass, direcao);
   }
 
-  // adiciona os eventos as tabs
+  // Adiciona os eventos nas tabs
   addTabNavEvent() {
-  // pra cada item do tabMenu ele adc um evento de click q vai fazer a func activeTAB e vai ativar de acordo com o index
     this.tabMenu.forEach((itemMenu, index) => {
       itemMenu.addEventListener('click', () => this.activeTab(index));
     });
