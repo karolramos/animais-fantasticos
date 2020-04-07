@@ -1,24 +1,21 @@
 export default class Funcionamento {
   constructor(funcionamento, activeClass) {
-    this.funcionamento = document.querySelector(funcionamento); // pego a li que ta com o data-semana
+    this.funcionamento = document.querySelector(funcionamento);
     this.activeClass = activeClass;
   }
 
   dadosFuncionamento() {
-    // pegando todos os dias da semana q estão dentro do dataset.
-    // split transformando a string em array e o map  retornando um novo array em forma de Numero
     this.diasSemana = this.funcionamento.dataset.semana.split(',').map(Number);
     this.horarioSemana = this.funcionamento.dataset.horario.split(',').map(Number);
   }
 
   dadosAgora() {
-    this.dataAgora = new Date(); // Data de agora
-    this.diaAgora = this.dataAgora.getDay(); // Dia agora - o dia da semana
+    this.dataAgora = new Date();
+    this.diaAgora = this.dataAgora.getDay();
     this.hrAgora = this.dataAgora.getUTCHours() - 3;
   }
 
   estaAberto() {
-    // se der um num q não tem no array da -1, qlqr coisa diferente disso é true
     this.semanaAberto = this.diasSemana.indexOf(this.diaAgora) !== -1;
     this.horarioAberto = (this.hrAgora >= this.horarioSemana[0] && this.hrAgora < this.horarioSemana[1]);
     // se o horario de agora for maior ou igual ao horario da semana no indice 0[8 horas] e
