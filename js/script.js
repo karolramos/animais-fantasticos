@@ -6,11 +6,13 @@ import Tooltip from './modules/tooltip.js';
 import fetchAnimais from './modules/fetch-animais.js';
 import fetchBitcoin from './modules/fetch-bitcoin.js';
 import ScrollAnima from './modules/scroll-anima.js';
+import DropdownMenu from './modules/dropdown-menu.js';
 
 
-import initDropDownMenu from './modules/dropdown-menu.js';
+
 import initMenuMobile from './modules/menu-mobile.js';
 import initHrFuncionamento from './modules/hrfuncionamento.js';
+
 
 const scrollSuave = new ScrollSuave('[data-menu="suave"] a[href^="#"]');
 scrollSuave.init();
@@ -30,7 +32,11 @@ tooltip.init();
 const scrollAnima = new ScrollAnima('[data-anime="scroll"]');
 scrollAnima.init();
 
-initDropDownMenu();
+
+const dropdownMenu = new DropdownMenu('[data-dropdown]');
+dropdownMenu.init();
+
+
 initMenuMobile();
 initHrFuncionamento();
 
