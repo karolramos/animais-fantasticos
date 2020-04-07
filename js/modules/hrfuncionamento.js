@@ -1,23 +1,43 @@
-export default function initHrFuncionamento() {
+export default class Funcionamento {
+  constructor(funcionamento, activeClass) {
+    this.funcionamento = document.querySelector(funcionamento); // pego a li que ta com o data-semana
+    this.activeClass = activeClass;
+  }
 
-  const funcionamento = document.querySelector('[data-semana]'); /*pego a li que ta com o data-semana*/
-  const diasSemana = funcionamento.dataset.semana.split(',').map(Number); /* pegando todos os dias da semana q estão dentro do dataset. split transformando a string em array e o map  retornando um novo array em forma de Numero*/
-  const horarioSemana = funcionamento.dataset.horario.split(',').map(Number);
+  dadosFuncionamento() {
+    // pegando todos os dias da semana q estão dentro do dataset.
+    // split transformando a string em array e o map  retornando um novo array em forma de Numero
+    this.diasSemana = this.funcionamento.dataset.semana.split(',').map(Number);
+    this.horarioSemana = this.funcionamento.dataset.horario.split(',').map(Number);
+  }
 
-  const dataAgora = new Date(); /* Data de agora*/
-  const diaAgora = dataAgora.getDay(); /* Dia agora - o dia da semana*/
-  const hrAgora = dataAgora.getHours();
+  dadosAgora() {
+    this.dataAgora = new Date(); // Data de agora
+    this.diaAgora = this.dataAgora.getDay(); // Dia agora - o dia da semana
+    this.hrAgora = this.dataAgora.getUTCHours() - 3;
+  }
 
-  /* verificando se está aberto no dia da semana */
-  const semanaAberto = diasSemana.indexOf(diaAgora) !== -1; /*se der um num q não tem no array da -1, qlqr coisa diferente disso é true*/
+  estaAberto() {
+    // se der um num q não tem no array da -1, qlqr coisa diferente disso é true
+    this.semanaAberto = this.diasSemana.indexOf(this.diaAgora) !== -1;
+    this.horarioAberto = (this.hrAgora >= this.horarioSemana[0] && this.hrAgora < this.horarioSemana[1]);
+    // se o horario de agora for maior ou igual ao horario da semana no indice 0[8 horas] e
+    // horário de agora for menor q o horário da semana no indice 1 [18 horas] o estabelecimento está aberto
 
-  /* verificando se está aberto no exato horário*/
-  const horarioAberto = (hrAgora  >= horarioSemana[0] && hrAgora <  horarioSemana[1]); /*true ou false a expressao vai retornar */
-  /*  se o horario de agora for maior ou igual ao horario da semana no indice 0[8 horas] e horário de agora for menor q o horário da semana no indice 1 [18 horas] o estabelecimento está aberto*/
+    return this.semanaAberto && this.horarioAberto;
+  }
 
-  if (semanaAberto && horarioAberto) {
-    funcionamento.classList.add('aberto'); /*vai adc no LI a classe Aberto*/
+  ativaAberto() {
+    if (this.estaAberto()) {
+      this.funcionamento.classList.add(this.activeClass); // vai adc no LI a classe Aberto
+    }
+  }
+
+  init() {
+    if (this.funcionamento) {
+      this.dadosFuncionamento();
+      this.dadosAgora();
+      this.ativaAberto();
+    }
   }
 }
-
-
